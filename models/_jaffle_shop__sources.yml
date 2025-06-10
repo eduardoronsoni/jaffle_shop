@@ -1,0 +1,30 @@
+version: 2
+
+sources:
+  - name: jaffle_shop
+    # description: <markdown_string>
+    database: dbt-studies-462323 # name of the bigquery project
+    schema: jaffle_shop # schema on bigquery that contains source data
+    # loader: <string>
+    # loaded_at_field: <column_name>
+    # meta: {<dictionary>}
+    # tags: [<string>]
+
+    tables:
+      - name: raw_customers #required
+        # description: <markdown_string>
+      - name: raw_orders
+        freshness:
+          warn_after: {count: 100, period: day}
+          error_after: {count: 100000, period: day}
+        loaded_at_field: ordered_At # not ideal, but the only datetime in the table
+
+
+      - name: raw_items
+      - name: raw_products
+      - name: raw_stores
+      - name: raw_supplies
+
+
+   
+  
