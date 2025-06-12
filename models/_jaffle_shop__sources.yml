@@ -12,13 +12,22 @@ sources:
 
     tables:
       - name: raw_customers #required
+        columns:
+          - name: customer_id
+            # tests: #we can also add tests to sources
+            #   - unique
+            #   - not_null
         # description: <markdown_string>
       - name: raw_orders
+        columns:
+            - name: id
+              tests: #we can also add tests to sources
+                - unique
+                - not_null
         freshness:
           warn_after: {count: 100, period: day}
           error_after: {count: 100000, period: day}
         loaded_at_field: ordered_At # not ideal, but the only datetime in the table
-
 
       - name: raw_items
       - name: raw_products
